@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Theegela Vamsi Krishna — VLSI | Embedded | Research Blog</title>
+<meta name="description" content="Personal blog of Theegela Vamsi Krishna — Electronics (VLSI) @ MIT Manipal. RISC-V SoC, SRAM, Hardware Security, Photonics, Embedded Systems." />
+<style>
+:root{
+  --bg:#070b16; --bg2:#0d1428; --card:#111a33; --card2:#0f1830;
+  --line:rgba(120,160,255,.14);
+  --text:#eef2ff; --muted:#9aa7c7;
+  --accent:#22d3ee; --accent2:#818cf8; --gold:#fbbf24; --green:#34d399; --pink:#f472b6;
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,Inter,Roboto,Arial,sans-serif;background:radial-gradient(1000px 500px at 80% -5%,rgba(34,211,238,.15),transparent),radial-gradient(900px 500px at 0% 10%,rgba(129,140,248,.18),transparent),var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+a{color:var(--accent)}
+.grid-bg{position:fixed;inset:0;z-index:-1;opacity:.35;background-image:linear-gradient(rgba(120,160,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(120,160,255,.07) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,black 40%,transparent 100%)}
+nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px 4vw;background:rgba(7,11,22,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.3px}
+.chip-logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,#22d3ee,#818cf8);color:#04121a;font-size:1.15rem}
+.brand small{display:block;color:var(--muted);font-weight:600;font-size:.75rem;letter-spacing:1.2px;text-transform:uppercase}
+.nav-links{display:flex;gap:18px;flex-wrap:wrap}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:700;font-size:.92rem}
+.nav-links a:hover{color:white}
+.btn{display:inline-block;padding:11px 22px;border-radius:999px;font-weight:800;text-decoration:none;border:none;cursor:pointer;background:linear-gradient(90deg,#22d3ee,#818cf8);color:#04121a;transition:.18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:white;border:1.5px solid rgba(255,255,255,.22)}
+.wrap{max-width:1150px;margin:0 auto;padding:0 4vw}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;padding:56px 0 20px;align-items:start}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.3);padding:7px 14px;border-radius:999px;font-size:.82rem;font-weight:800;letter-spacing:.4px;color:#a5f3fc;margin-bottom:16px}
+h1{font-size:clamp(2.2rem,5vw,3.7rem);line-height:1.02;letter-spacing:-1.5px;margin-bottom:14px}
+h1 .grad{background:linear-gradient(90deg,#22d3ee,#818cf8,#f472b6,#fbbf24);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);font-size:1.05rem;max-width:620px;margin-bottom:18px}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 22px}
+.meta{font-size:.86rem;background:rgba(255,255,255,.06);border:1px solid var(--line);padding:7px 12px;border-radius:999px;color:#dbe4ff}
+.meta b{color:white}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.stat strong{font-size:1.35rem;display:block}
+.stat span{font-size:.8rem;color:var(--muted)}
+.profile{background:linear-gradient(180deg,#141e3d,#0c1329);border:1px solid var(--line);border-radius:22px;padding:26px;position:relative;overflow:hidden}
+.profile::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 10%,rgba(34,211,238,.25),transparent 55%),radial-gradient(circle at 10% 95%,rgba(244,114,182,.18),transparent 50%)}
+.photo-wrap{position:relative;display:flex;gap:18px;align-items:center;margin-bottom:16px}
+.photo{width:132px;height:132px;border-radius:28px;object-fit:cover;border:3px solid rgba(34,211,238,.5);background:#1a2547;display:block}
+.photo-fallback{width:132px;height:132px;border-radius:28px;display:grid;place-items:center;font-size:2.6rem;font-weight:900;background:linear-gradient(135deg,#22d3ee,#818cf8);color:#04121a;border:3px solid rgba(255,255,255,.25)}
+.profile h3{position:relative;font-size:1.35rem}
+.profile .role{position:relative;color:var(--accent);font-weight:800;font-size:.9rem;letter-spacing:.3px}
+.profile p{position:relative;color:var(--muted);font-size:.93rem;margin:12px 0}
+.tags{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tags span{background:rgba(255,255,255,.08);border:1px solid var(--line);padding:5px 11px;border-radius:999px;font-size:.78rem;font-weight:700}
+.contact-mini{position:relative;margin-top:16px;display:grid;gap:8px;font-size:.9rem}
+.contact-mini a{color:#dbe4ff;text-decoration:none;word-break:break-all}
+.contact-mini a:hover{color:white}
+section{padding:44px 0}
+.kicker{font-size:.82rem;font-weight:900;letter-spacing:2.2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+h2{font-size:clamp(1.6rem,3.4vw,2.4rem);letter-spacing:-.8px;margin-bottom:10px}
+.lead{color:var(--muted);max-width:760px}
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.card h3{margin-bottom:8px;font-size:1.12rem}
+.card p,.card li{color:var(--muted);font-size:.95rem}
+.card ul{padding-left:18px;margin-top:8px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pill{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);color:#c9f6ff;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:700}
+.pill.gold{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3);color:#fde68a}
+.pill.violet{background:rgba(129,140,248,.12);border-color:rgba(129,140,248,.35);color:#ddd6fe}
+.timeline{margin-top:20px;display:grid;gap:14px}
+.t-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;position:relative}
+.t-item .when{font-size:.8rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--gold)}
+.t-item h3{margin:4px 0}
+.t-item .org{color:var(--accent);font-weight:700;font-size:.93rem}
+.t-item ul{margin:10px 0 0 18px;color:var(--muted);font-size:.94rem}
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.proj{background:var(--card2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:.18s}
+.proj:hover{transform:translateY(-5px);border-color:rgba(34,211,238,.4)}
+.thumb{padding:18px 18px 0;font-size:1.7rem}
+.proj-body{padding:14px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.proj-body h3{font-size:1.02rem;line-height:1.35}
+.proj-body p{color:var(--muted);font-size:.88rem;flex:1}
+.stack{font-size:.76rem;color:#a5f3fc;font-weight:700}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap}
+.badge{font-size:.72rem;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(52,211,153,.14);border:1px solid rgba(52,211,153,.35);color:#a7f3d0}
+.badge.ongoing{background:rgba(251,191,36,.14);border-color:rgba(251,191,36,.4);color:#fde68a}
+.badge.paper{background:rgba(129,140,248,.15);border-color:rgba(129,140,248,.45);color:#ddd6fe}
+.proj-body a{font-weight:800;font-size:.88rem;text-decoration:none}
+.patent{background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(244,114,182,.12));border:1px solid rgba(251,191,36,.35);border-radius:var(--radius);padding:22px;margin-top:20px}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.skills-grid .card h3{color:var(--accent);font-size:.95rem;letter-spacing:.4px;text-transform:uppercase}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.cert-box{margin-top:20px;border:1.5px dashed rgba(255,255,255,.25);border-radius:var(--radius);padding:22px;text-align:center;color:var(--muted)}
+.contact-box{margin-top:20px;background:linear-gradient(135deg,#22d3ee,#818cf8,#f472b6);border-radius:24px;padding:2px}
+.contact-inner{background:#0a1124;border-radius:22px;padding:32px;text-align:center}
+.contact-inner p{color:var(--muted);max-width:600px;margin:10px auto 20px}
+.socials{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.socials a{color:white;text-decoration:none;background:rgba(255,255,255,.08);padding:10px 18px;border-radius:999px;font-weight:700;border:1px solid rgba(255,255,255,.18);font-size:.9rem}
+.socials a:hover{background:rgba(255,255,255,.16)}
+form{display:grid;gap:10px;max-width:520px;margin:22px auto 0;text-align:left}
+input,textarea{width:100%;padding:12px 15px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:white;font-family:inherit}
+footer{text-align:center;padding:28px;color:var(--muted);font-size:.88rem}
+table.info{width:100%;border-collapse:collapse;margin-top:12px;font-size:.92rem}
+table.info td{padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.07);color:var(--muted)}
+table.info td:first-child{color:#dbe4ff;font-weight:700;width:42%}
+.sports{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sports span{background:rgba(255,255,255,.07);border:1px solid var(--line);padding:7px 13px;border-radius:999px;font-size:.84rem;font-weight:700}
+@media(max-width:950px){.hero{grid-template-columns:1fr}.projects,.skills-grid,.blog-grid{grid-template-columns:1fr 1fr}.cards2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.nav-links{display:none}}
+@media(max-width:600px){.projects,.skills-grid,.blog-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <div class="brand"><div class="chip-logo">VK</div><div>THEEGELA VAMSI KRISHNA<small>VLSI • Embedded • Photonics</small></div></div>
+  <div class="nav-links">
+    <a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#research">Research</a><a href="#projects">Projects</a><a href="#blog">Blog</a><a href="#contact">Contact</a>
+  </div>
+  <a class="btn" href="#contact">Hire / Collaborate</a>
+</nav>
+
+<div class="wrap">
+<header class="hero">
+  <div>
+    <div class="eyebrow">● Open to research internships • Tapeout • Embedded roles</div>
+    <h1>Designing <span class="grad">silicon, systems &amp; sensors</span> — from RTL to photonics.</h1>
+    <p class="sub">I'm <b>Vamsi Krishna Theegela</b>, 3rd-year (5th sem) B.Tech Electronics Engineering (VLSI) at <b>Manipal Institute of Technology, Manipal</b> — CGPA <b>8.22</b>, graduating <b>2028</b>. I work across Digital ASIC, custom CMOS, memory, hardware security, FPGA prototyping, embedded firmware (STM32 / ESP32 / Raspberry Pi) and now <b>B.Tech (Hons.) in Photonics</b>. Currently deep into <b>testing, verification &amp; fabrication flow</b>.</p>
+    <div class="meta-row">
+      <span class="meta">📍 Visakhapatnam, Andhra Pradesh</span>
+      <span class="meta">🎓 MIT Manipal • <b>CGPA 8.22</b></span>
+      <span class="meta">📜 Patent Filed <b>202641053073</b></span>
+      <span class="meta">📄 Paper submitted: UPWISCON</span>
+    </div>
+    <div class="cta">
+      <a class="btn" href="#projects">View my work ↓</a>
+      <a class="btn btn-ghost" href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn btn-ghost" href="resume.html">Resume</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong>15+</strong><span>RTL / ASIC / FPGA projects</span></div>
+      <div class="stat"><strong>3</strong><span>Virtuoso papers in prep + 1 submitted</span></div>
+      <div class="stat"><strong>1</strong><span>Provisional patent filed</span></div>
+      <div class="stat"><strong>20+</strong><span>EDA / open-source tools</span></div>
+    </div>
+  </div>
+  <div class="profile">
+    <div class="photo-wrap">
+      <!-- To show your photo: save your picture as photo.jpg next to index.html -->
+      <img class="photo" src="photo.jpg" alt="Vamsi Krishna Theegela" onerror="this.style.display='none';document.getElementById('pfb').style.display='grid'" />
+      <div class="photo-fallback" id="pfb" style="display:none">VK</div>
+      <div><h3>Theegela Vamsi Krishna</h3><div class="role">Electronics (VLSI) • MIT Manipal '28</div></div>
+    </div>
+    <p>RTL → Synthesis → PNR → Verification. Transistor-level SRAM &amp; hardware security in <b>Cadence Virtuoso</b>, open-source tapeout flow in <b>OpenLane / OpenROAD / Yosys</b>, FPGA on <b>Artix-7 Basys3 (Vivado)</b> — currently focused on <b>testing, verification &amp; fabrication</b>, embedded firmware on <b>STM32 (CubeIDE/CubeMX, HAL) / ESP32 / Raspberry Pi / Arduino</b>, TCAD + COMSOL for devices &amp; photonics.<br><br>Research Assistant under <b>Dr. Arjun Sunil Rao</b> • B.Tech Hons. (Photonics) under <b>Dr. Amit Kumar Goyal</b> • Electronics team, <b>Team Karting Manipal</b>.</p>
+    <div class="tags"><span>🔧 RTL Design</span><span>📐 Physical Design</span><span>🧠 Computer Architecture</span><span>🔐 Hardware Security</span><span>💡 Photonics</span><span>🤖 STM32 • ESP32 • RPi</span><span>🧵 Artix-7 FPGA</span></div>
+    <div class="contact-mini">
+      <span>📞 <a href="tel:+919502708930">95027 08930</a></span>
+      <span>✉️ <a href="mailto:vamsikrishnatheegela2.03006@gmail.com">vamsikrishnatheegela2.03006@gmail.com</a></span>
+      <span>🔗 <a href="https://www.linkedin.com/in/vamsi-krishna-theegela-7b9196320/" target="_blank" rel="noopener">linkedin.com/in/vamsi-krishna-theegela</a></span>
+      <span>💻 <a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">github.com/vamsikrishnatheegela</a></span>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="kicker">— About me</div>
+  <h2>Engineer by training, athlete by habit.</h2>
+  <p class="lead">I like building full-stack hardware: a sensor-fused helmet with a digital twin on one end, a RISC-V SoC with DMA on the other — and everything in between (SRAM, PUFs, logic locking, AES, BMS, photonics). Off the keyboard I'm on the field — hockey midfielder, cricket, volleyball, basketball, kabaddi, badminton, tennis, running, boxing, swimming &amp; long jump.</p>
+  <div class="cards2">
+    <div class="card">
+      <h3>🎓 Education</h3>
+      <table class="info">
+        <tr><td>College</td><td>Manipal Institute of Technology, Manipal</td></tr>
+        <tr><td>Degree</td><td>B.Tech, Electronics Engineering (VLSI), 3rd Year / 5th Sem</td></tr>
+        <tr><td>Graduation</td><td>2028 (expected) • CGPA 8.22</td></tr>
+        <tr><td>Honours</td><td>B.Tech (Hons.) in Photonics — under Dr. Amit Kumar Goyal (ongoing)</td></tr>
+        <tr><td>Hometown</td><td>Visakhapatnam, Andhra Pradesh</td></tr>
+      </table>
+      <div class="pill-row"><span class="pill">VLSI</span><span class="pill">Embedded</span><span class="pill violet">Photonics (Hons.)</span></div>
+    </div>
+    <div class="card">
+      <h3>🧭 Core Expertise</h3>
+      <div class="pill-row">
+        <span class="pill">Digital ASIC Design</span><span class="pill">Physical Design</span><span class="pill">Custom CMOS Design</span><span class="pill">Memory Design</span><span class="pill">Computer Architecture</span><span class="pill">RTL Design</span><span class="pill">Hardware Verification</span><span class="pill">Static Timing Analysis</span><span class="pill">Embedded Firmware (STM32 / ESP32 / RPi)</span><span class="pill">FPGA Prototyping (Artix-7)</span><span class="pill">Testing &amp; Verification</span><span class="pill">Fabrication Flow</span><span class="pill gold">Hardware Security</span>
+      </div>
+      <ul>
+        <li>NCC Corporal, Alpha Grade — NCC 'B' Certificate; Corps of Military Police Attachment Camp, Bengaluru.</li>
+        <li>IEEE Student Member • IEEE GRSS Member • Research Society Member.</li>
+        <li>Team Karting Manipal (Electronics) • MIT Hockey Team Midfielder — Inter-MAHE Winners 2024, 2025, 2026.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="kicker">— Technical arsenal</div>
+  <h2>From transistors to tapeout to firmware.</h2>
+  <div class="skills-grid">
+    <div class="card"><h3>HDLs</h3><div class="pill-row"><span class="pill">Verilog</span><span class="pill">SystemVerilog</span><span class="pill">VHDL</span></div><p style="margin-top:10px">RTL, FSMs, testbenches, timing, ASIC methodology. Microwind for CMOS layout practice.</p></div>
+    <div class="card"><h3>Commercial EDA (Cadence / Synopsys)</h3><div class="pill-row"><span class="pill">Virtuoso</span><span class="pill">Spectre</span><span class="pill">Genus</span><span class="pill">Innovus</span><span class="pill">Xcelium</span><span class="pill">Voltus</span><span class="pill">Quantus</span><span class="pill">Sentaurus TCAD</span><span class="pill">COMSOL Multiphysics</span></div><p style="margin-top:10px">Schematic → layout → DRC/LVS → PEX → post-layout PVT / Monte Carlo / SNM / STA.</p></div>
+    <div class="card"><h3>Open-source silicon flow</h3><div class="pill-row"><span class="pill">Yosys</span><span class="pill">OpenROAD</span><span class="pill">OpenLane</span><span class="pill">OpenSTA</span><span class="pill">Magic</span><span class="pill">KLayout</span><span class="pill">ngspice</span><span class="pill">LTspice</span><span class="pill">KiCad</span></div><p style="margin-top:10px">RTL-to-GDSII, STA, DRC/LVS viewing, analog sim, PCB design. FPGA + Embedded C alongside.</p></div>
+    <div class="card"><h3>Programming</h3><div class="pill-row"><span class="pill">C</span><span class="pill">Embedded C</span><span class="pill">Python</span><span class="pill">MATLAB</span><span class="pill">TCL</span><span class="pill">Bash</span></div><p style="margin-top:10px">Aestimo-QL quantum-well framework, data analysis, automation scripts, Raspberry Pi Linux workflows.</p></div>
+    <div class="card"><h3>Embedded expertise — STM32 • ESP32 • Raspberry Pi</h3><div class="pill-row"><span class="pill">STM32CubeIDE</span><span class="pill">STM32CubeMX</span><span class="pill">STM32 HAL</span><span class="pill">ESP32 (Wi-Fi/BLE)</span><span class="pill">Raspberry Pi (Python/Linux)</span><span class="pill">Arduino IDE</span><span class="pill">Keil µVision</span><span class="pill">CAN</span><span class="pill">DAQ</span><span class="pill">Git</span></div><p style="margin-top:10px">Hands-on firmware + board bring-up: sensor integration, wiring harness, PCB, CAN-based EV electronics (Team Karting Manipal), helmet digital-twin telemetry.</p></div>
+    <div class="card"><h3>FPGA — Artix-7 Basys3 (testing • verification • fab)</h3><div class="pill-row"><span class="pill">Artix-7 Basys3</span><span class="pill">Vivado</span><span class="pill">Verilog / VHDL on FPGA</span><span class="pill">Testbenches</span><span class="pill">Timing Constraints</span><span class="pill">Board Testing</span></div><p style="margin-top:10px">Worked on Artix-7 Basys3 kit — RTL prototyping, on-board testing &amp; debug. Currently working on <b>testing, verification and fabrication-oriented</b> flows (constraints → bitstream → board validation).</p></div>
+    <div class="card"><h3>Devices • TCAD • Photonics</h3><div class="pill-row"><span class="pill violet">Sentaurus TCAD (SProcess / SDevice / SVisual / Inspect)</span><span class="pill violet">COMSOL</span><span class="pill violet">Aestimo 1D</span><span class="pill violet">HVK SJ-LDMOS</span><span class="pill violet">Bragg Reflectors</span></div><p style="margin-top:10px">Process/device simulation: doping, carriers, e-fields. DBR stacks for photonic bandgap — linked to Hons. in Photonics.</p></div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="kicker">— Experience</div>
+  <h2>Labs, internships &amp; race tracks.</h2>
+  <div class="timeline">
+    <div class="t-item"><div class="when">Ongoing • MIT Manipal</div><h3>Undergraduate Research Assistant</h3><div class="org">Supervisor: Dr. Arjun Sunil Rao</div>
+      <ul><li>Design &amp; comparative analysis of <b>6T vs 8T SRAM cells</b> under PVT + Monte Carlo in Cadence Virtuoso.</li><li>Transistor-level design, layout, DRC/LVS, Quantus PEX, post-layout SNM / delay / leakage / power with Spectre.</li><li>Extending to <b>logic-locking (standard-cell vs transmission-gate)</b> and <b>programmable-delay logic</b> — converting to conference papers.</li></ul></div>
+    <div class="t-item"><div class="when">Jun 2026 – Oct 2026 (Ongoing)</div><h3>VLSI IC Design Intern</h3><div class="org">ASD Academy of Skill Development (AICTE NEAT | MSME Approved)</div>
+      <ul><li>Designed a <b>2×2 MAC-based AI accelerator (systolic array)</b> in Verilog.</li><li>Designed &amp; verified digital blocks in Verilog + VHDL; built <b>Digital Door Lock System in VHDL</b>.</li><li>CMOS layout in Microwind; RTL, FSMs, timing analysis, ASIC flow.</li></ul></div>
+    <div class="t-item"><div class="when">15 Jun 2026 – 13 Aug 2026</div><h3>Industrial Training / Internship — VLSI based IC Design</h3><div class="org">Ardent Software Services, Kolkata</div>
+      <ul><li>Certified: <i>“VAMSI KRISHNA THEEGELA of MANIPAL INSTITUTE OF TECHNOLOGY has completed Industrial Training/Internship at Ardent Software on VLSI based IC Design.”</i></li><li>Capstone: <b>Digital Door Locking System using VHDL</b> — FSM, simulated &amp; implemented.</li></ul></div>
+    <div class="t-item"><div class="when">Ongoing • Student Project</div><h3>Electronics &amp; Embedded Systems Team</h3><div class="org">Team Karting Manipal — Formula Student Electric Kart</div>
+      <ul><li>PCB design, wiring harness, CAN-based electronics, sensor integration, DAQ, electrical integration.</li><li>Patent link: tire-grip estimation + low-latency torque control architecture for lightweight EVs.</li></ul></div>
+  </div>
+  <div class="patent">
+    <div class="kicker" style="color:#92400e">— Patent filed</div>
+    <h3 style="font-size:1.2rem">Hardware Architecture for Real-Time Tire Grip Estimation and Low-Latency Motor Torque Control for Lightweight Electric Vehicles</h3>
+    <p style="color:#574410;font-size:.93rem;margin-top:6px">Provisional Indian Patent Application No. <b>202641053073</b> • Filed 25-Apr-2026 • Lightweight EV control loop: grip sensing → torque actuation with deterministic low latency.</p>
+  </div>
+</section>
+
+<section id="research">
+  <div class="kicker">— Research &amp; papers</div>
+  <h2>Memory, security &amp; photonics.</h2>
+  <div class="cards2">
+    <div class="card"><h3>📄 Submitted — UPWISCON Conference</h3><p>One Virtuoso hardware-security paper submitted (application filed). Two more in conversion: <b>logic-locking comparative analysis (standard logic-gate vs transmission-gate styles)</b> and <b>programmable delay logic</b> — all under Dr. Arjun Sunil Rao. Plus an early exploratory <b>PUF attempt</b> (documented as a failed-then-learned experiment — honest silicon!).</p><div class="pill-row"><span class="pill gold">Submitted</span><span class="pill violet">2 in preparation</span></div></div>
+    <div class="card"><h3>🔬 6T / 8T SRAM under PVT + Monte Carlo</h3><p>Full custom flow: sizing, stability (SNM), read/write margin, leakage/power/delay corners, mismatch POV. Virtuoso + Spectre + Quantus. Target: pick the right cell for low-power vs robust operation.</p></div>
+    <div class="card"><h3>🌈 Photonic Bandgap Engineering Using Distributed Bragg Reflectors (ongoing)</h3><p>Developing multilayer photonic structures in <b>COMSOL Multiphysics</b> to investigate wavelength-selective reflectance, refractive-index contrast and photonic bandgap behaviour. Still simulating — converging to a unique high-reflectivity recipe. Feeds my Hons. under Dr. Amit Kumar Goyal.</p><div class="pill-row"><span class="pill gold">Ongoing in COMSOL</span></div></div>
+    <div class="card"><h3>⚛️ Aestimo-QL: quantum wells, reproducibly</h3><p>A reproducible computational framework for semiconductor quantum-well simulation &amp; parameter analysis using <b>Aestimo 1D</b>. Python wrappers, sweeps, plots — so anyone can rerun the physics. On GitHub.</p><div class="pill-row"><span class="pill">Python</span><span class="pill">Aestimo 1D</span><span class="pill">Reproducibility</span></div></div>
+    <div class="card"><h3>🔬 TCAD-Based HVK SJ-LDMOS Device Analysis</h3><p>Semiconductor process + device simulation in <b>Synopsys Sentaurus (SProcess, SDevice, SVisual, Inspect)</b>. Analyzed electrical characteristics, doping profiles, carrier distribution, electric fields and device performance.</p><div class="pill-row"><span class="pill violet">Sentaurus TCAD</span></div></div>
+    <div class="card"><h3>✖️ Approximate Multiplier — 5.1% area, ~50% error cut</h3><p>Truncated vs compensated multipliers for PPA–accuracy trade-offs: <b>~5.1% area reduction</b>, compensated version gives <b>~50% error reduction vs truncated</b> with comparable timing. Feeds the RISC-V error-tolerant datapath.</p></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="kicker">— Projects (see GitHub for more)</div>
+  <h2>Things I've taped out (virtually) &amp; wired up.</h2>
+  <div class="projects">
+    <div class="proj"><div class="thumb">🪖</div><div class="proj-body"><div class="badge-row"><span class="badge ongoing">Ongoing student project</span></div><h3>Smart Safety Helmet — Sensor-Fusion Multimodal + Digital Twin</h3><p>Helmet with IMU, gas, temperature, impact &amp; proximity fusion; BLE/Wi-Fi telemetry to a live digital-twin dashboard for crash detection, fatigue/gas alerts and predictive maintenance. Embedded C + Python twin. I'm actively building the Day-0 → prototype loop.</p><span class="stack">Embedded C • ESP32 • Python • Sensor fusion</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">Repo / updates →</a></div></div>
+    <div class="proj"><div class="thumb">🧬</div><div class="proj-body"><div class="badge-row"><span class="badge">SoC</span></div><h3>RISC-V CPU SoC with DMA + Error-Tolerant Multiplier</h3><p>Small RISC-V core stitched with a DMA engine and an approximate/error-tolerant multiplier for energy-aware workloads. Verified datapath, bus arbitration, DMA transfers.</p><span class="stack">SystemVerilog • Verilog • Yosys • OpenLane</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+    <div class="proj"><div class="thumb">✖️</div><div class="proj-body"><div class="badge-row"><span class="badge paper">Analysis + paper trail</span></div><h3>Approximate Multiplier for Energy-Efficient Computing</h3><p>Truncated &amp; compensated multipliers: ~5.1% area reduction; compensated achieves ~50% error reduction vs truncated with comparable timing. Tables, plots, RTL + synthesis numbers.</p><span class="stack">Verilog • Genus • OpenSTA • Python</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+    <div class="proj"><div class="thumb">🔐</div><div class="proj-body"><div class="badge-row"><span class="badge">Accelerator</span></div><h3>AES-128 10-Round Hardware Accelerator</h3><p>Full 10-round AES-128 datapath: SubBytes / ShiftRows / MixColumns / AddRoundKey, key expansion, FSM control. Verified with known-answer tests, synthesized.</p><span class="stack">Verilog/VHDL • Xcelium • Genus</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+    <div class="proj"><div class="thumb">🔋</div><div class="proj-body"><div class="badge-row"><span class="badge ongoing">In progress</span></div><h3>BMS + VLSI sensing front-end</h3><p>Battery-management experiments: cell sensing, balancing logic and RTL for monitoring/protection hooks. Tied to EV karting work and the tire-grip patent mindset — real-time, low latency.</p><span class="stack">Embedded C • Verilog • LTspice</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+    <div class="proj"><div class="thumb">⚛️</div><div class="proj-body"><div class="badge-row"><span class="badge">Open science</span></div><h3>Aestimo-QL — Quantum-Well Sim Framework</h3><p>Reproducible semiconductor quantum-well simulation &amp; parameter sweeps on Aestimo 1D. Configs, notebooks, figures — rerun everything with one command.</p><span class="stack">Python • Aestimo 1D • MATLAB</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+    <div class="proj"><div class="thumb">🚪</div><div class="proj-body"><div class="badge-row"><span class="badge">Internship build</span></div><h3>Digital Door Locking System (VHDL)</h3><p>Ardent / ASD internship capstone: password FSM, debouncing, lock actuator control. Simulated &amp; documented.</p><span class="stack">VHDL • FPGA • FSM</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+    <div class="proj"><div class="thumb">🧮</div><div class="proj-body"><div class="badge-row"><span class="badge">AI accel</span></div><h3>2×2 MAC Systolic-Array AI Accelerator</h3><p>Verilog systolic array for matrix multiply — weight-stationary dataflow, verified testbench. ASD internship.</p><span class="stack">Verilog • Xcelium</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+    <div class="proj"><div class="thumb">🪞</div><div class="proj-body"><div class="badge-row"><span class="badge ongoing">COMSOL • ongoing</span></div><h3>Photonic Bandgap Engineering Using Distributed Bragg Reflectors</h3><p>COMSOL multilayer photonic structures: wavelength-selective reflectance, index contrast, bandgap behaviour. Sweeping pairs, contrast, incidence — chasing a sharp stopband. Still simulating.</p><span class="stack">COMSOL • Photonics</span><a href="#research">Read the note →</a></div></div>
+    <div class="proj"><div class="thumb">🧵</div><div class="proj-body"><div class="badge-row"><span class="badge ongoing">FPGA • testing now</span></div><h3>Artix-7 Basys3 FPGA — Testing &amp; Verification</h3><p>RTL prototyping on Artix-7 Basys3 (Vivado): door-lock, RISC blocks &amp; accelerator kernels ported to board, constraints, bitstream, on-board testing &amp; debug. Currently focused on verification + fabrication-oriented flow.</p><span class="stack">Verilog / VHDL • Vivado • Basys3</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+    <div class="proj"><div class="thumb">🔬</div><div class="proj-body"><div class="badge-row"><span class="badge">TCAD</span></div><h3>HVK SJ-LDMOS Device Analysis (Sentaurus)</h3><p>SProcess → SDevice → SVisual/Inspect: doping, carriers, e-fields, I-V. Device-performance analysis for high-voltage SJ-LDMOS.</p><span class="stack">Sentaurus TCAD • SProcess • SDevice</span><a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+  </div>
+  <p class="lead" style="margin-top:14px">+ more ASIC mini-projects on GitHub (PUF explorations, logic-locking cells, delay lines, SRAM test structures, OpenLane runs). If a repo is missing docs, ping me — I'm backfilling READMEs.</p>
+</section>
+
+<section id="blog">
+  <div class="kicker">— Notes / mini-blog</div>
+  <h2>What I'm learning out loud.</h2>
+  <div class="blog-grid">
+    <div class="card"><h3>⚡ Why I compare standard-cell vs transmission-gate logic locking</h3><p>Overhead isn't just transistors — it's leakage, delay spread under PVT, and how SAT solvers see your key-gates. Notes from my Virtuoso sweeps…</p><p style="margin-top:10px"><a href="#contact">Discuss →</a></p></div>
+    <div class="card"><h3>🧠 Truncation vs compensation: when error is a feature</h3><p>Approximate multipliers buy real power/area — if you bound the error where your application can tolerate it. My RISC-V + DMA test case…</p><p style="margin-top:10px"><a href="#contact">Discuss →</a></p></div>
+    <div class="card"><h3>🪞 DBR diary: chasing 99% reflectance in COMSOL</h3><p>Pairs vs contrast vs bandwidth — live log of my Bragg reflector sims for the Photonics honours thread…</p><p style="margin-top:10px"><a href="#contact">Discuss →</a></p></div>
+  </div>
+</section>
+
+<section id="play">
+  <div class="kicker">— Beyond silicon</div>
+  <h2>Sport keeps the timing closed.</h2>
+  <div class="card"><h3>🏑🏏 Sports I play</h3><p>Good at cricket &amp; hockey (MIT Hockey midfielder — Inter-MAHE champs '24, '25, '26). Also: volleyball, basketball, kabaddi, badminton, tennis, running, boxing, swimming, long jump. NCC discipline helps — Corporal, Alpha Grade.</p><div class="sports"><span>🏑 Hockey</span><span>🏏 Cricket</span><span>🏐 Volleyball</span><span>🏀 Basketball</span><span>🤼 Kabaddi</span><span>🏸 Badminton</span><span>🎾 Tennis</span><span>🏃 Running</span><span>🥊 Boxing</span><span>🏊 Swimming</span><span>🦘 Long jump</span></div></div>
+</section>
+
+<section id="contact">
+  <div class="kicker">— Contact</div>
+  <h2>Let's build chips (or karts) together.</h2>
+  <div class="contact-box"><div class="contact-inner">
+    <h3 style="font-size:1.4rem">Internships, research collabs, tapeout help — my inbox is open.</h3>
+    <p>Fastest: email or LinkedIn. Phone/WhatsApp for urgent team stuff. Visakhapatnam ↔ Manipal.</p>
+    <div class="socials">
+      <a href="mailto:vamsikrishnatheegela2.03006@gmail.com">✉️ Email</a>
+      <a href="tel:+919502708930">📞 95027 08930</a>
+      <a href="https://www.linkedin.com/in/vamsi-krishna-theegela-7b9196320/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/vamsikrishnatheegela" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <form onsubmit="event.preventDefault(); window.location.href='mailto:vamsikrishnatheegela2.03006@gmail.com?subject='+encodeURIComponent('Hello Vamsi — from your blog')+'&body='+encodeURIComponent(this.msg.value+'\n\n— '+this.name.value+' ('+this.email.value+')');">
+      <input name="name" placeholder="Your name" required /><input name="email" type="email" placeholder="Your email" required /><textarea name="msg" rows="4" placeholder="Your message..." required></textarea>
+      <button class="btn" type="submit">Send via Email ✈️</button>
+    </form>
+  </div></div>
+</section>
+</div>
+<footer>© 2026 Theegela Vamsi Krishna • MIT Manipal • Built with ♥ — RTL to photonics • <a href="#" style="color:#22d3ee">Back to top ↑</a></footer>
+</body>
+</html>
